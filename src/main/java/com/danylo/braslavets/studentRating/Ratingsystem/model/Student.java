@@ -1,9 +1,7 @@
 package com.danylo.braslavets.studentRating.Ratingsystem.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -15,6 +13,10 @@ public class Student implements Comparable<Student> {
 
     @NotEmpty
     private String studentName;
+
+    @ManyToOne
+    @JsonBackReference
+    private Group group;
 
     @Min(0)
     @Max(100)

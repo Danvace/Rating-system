@@ -1,10 +1,9 @@
 package com.danylo.braslavets.studentRating.Ratingsystem.service;
 
-import com.danylo.braslavets.studentRating.Ratingsystem.exception.NotFoundException;
+import com.danylo.braslavets.studentRating.Ratingsystem.exception.StudentNotFoundException;
 import com.danylo.braslavets.studentRating.Ratingsystem.model.Student;
 import com.danylo.braslavets.studentRating.Ratingsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -31,22 +30,27 @@ public class StudentService {
     }
 
     public Student putStudent(Student student) {
-        return studentRepository.saveAndFlush(student);
+        return studentRepository.save(student);
     }
 
-    public Student getStudentById(Long id) throws ChangeSetPersister.NotFoundException {
-        return studentRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new StudentNotFoundException(String.format("There is no student with id = %s", id)));
     }
 
     public void deleteStudentBy(Long id) {
         Optional<Student> student = studentRepository.findById(id);
         if (student.isEmpty()) {
-            throw new NotFoundException(String.format("There is no student with id = %s", id));
+            throw new StudentNotFoundException(String.format("There is no student with id = %s", id));
         }
         studentRepository.deleteById(id);
     }
 
     public void deleteAllStudents() {
         studentRepository.deleteAll();
+    }
+
+    public List<Student> getStudentsByGroupId(Long groupId) {
+        return studentRepository.findByGroupId(groupId);
     }
 }
