@@ -1,47 +1,51 @@
 package com.danylo.braslavets.studentRating.Ratingsystem.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Entity
 public class Student implements Comparable<Student> {
 
-    @NotEmpty
+    @NotEmpty(message = "Student name should not be empty")
+    @NotNull(message = "Student name should not be null")
     private String studentName;
 
-    @Min(0)
-    @Max(100)
+    @ManyToOne
+    @JsonBackReference
+    private Group group;
+
+    @Min(value = 0, message = "Mark should not be less than 0")
+    @Max(value = 100, message = "Mark should not be greater than 100")
     private int ukrainianLanguage;
 
-    @Min(0)
-    @Max(100)
+    @Min(value = 0, message = "Mark should not be less than 0")
+    @Max(value = 100, message = "Mark should not be greater than 100")
     private int basicsOfCircuitTechnology;
 
-    @Min(0)
-    @Max(100)
+    @Min(value = 0, message = "Mark should not be less than 0")
+    @Max(value = 100, message = "Mark should not be greater than 100")
     private int matAnal;
 
-    @Min(0)
-    @Max(100)
+    @Min(value = 0, message = "Mark should not be less than 0")
+    @Max(value = 100, message = "Mark should not be greater than 100")
     private int courseWork;
 
-    @Min(0)
-    @Max(100)
+    @Min(value = 0, message = "Mark should not be less than 0")
+    @Max(value = 100, message = "Mark should not be greater than 100")
     private int discreteMath;
 
-    @Min(0)
-    @Max(100)
+    @Min(value = 0, message = "Mark should not be less than 0")
+    @Max(value = 100, message = "Mark should not be greater than 100")
     private int algorithmAndProgramming;
 
-    @Min(0)
-    @Max(100)
+    @Min(value = 0, message = "Mark should not be less than 0")
+    @Max(value = 100, message = "Mark should not be greater than 100")
     private int english;
 
     @Id
@@ -62,4 +66,5 @@ public class Student implements Comparable<Student> {
     public int compareTo(Student o) {
         return Double.compare(o.getRating(), this.getRating());
     }
+
 }
