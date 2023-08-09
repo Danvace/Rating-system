@@ -89,6 +89,25 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.21.0</version>
 			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--				<version>3.2.1</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>validate</id>-->
+<!--						<phase>validate</phase>-->
+<!--						<configuration>-->
+<!--							<configLocation>src/main/resources/static/CheckStyleConfiguration.xml</configLocation>-->
+<!--							<consoleOutput>true</consoleOutput>-->
+<!--							<failsOnError>true</failsOnError>-->
+<!--						</configuration>-->
+<!--						<goals>-->
+<!--							<goal>check</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 

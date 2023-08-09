@@ -31,17 +31,17 @@ public class Group {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Student> students;
 
-    public void addStudent(Student student) {
+    public void addStudent(final Student student) {
         students.add(student);
         student.setGroup(this);
     }
 
-    public void removeStudent(Student student) {
+    public void removeStudent(final Student student) {
         students.remove(student);
         student.setGroup(null);
     }
 
-    public Student getStudentById(Long id) throws StudentNotFoundException {
+    public Student getStudentById(final Long id) throws StudentNotFoundException {
         return students.stream()
                 .filter(student -> student.getId().equals(id))
                 .findFirst()

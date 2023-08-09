@@ -15,7 +15,7 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     @Autowired
-    public StudentService(StudentRepository studentDAO) {
+    public StudentService(final StudentRepository studentDAO) {
         this.studentRepository = studentDAO;
     }
 
@@ -25,20 +25,21 @@ public class StudentService {
         return allStudents;
     }
 
-    public Student addStudent(Student student) {
+    public Student addStudent(final Student student) {
         return studentRepository.save(student);
     }
 
-    public Student putStudent(Student student) {
+    public Student putStudent(final Student student) {
         return studentRepository.save(student);
     }
 
-    public Student getStudentById(Long id) throws StudentNotFoundException {
+    public Student getStudentById(final Long id) throws StudentNotFoundException {
         return studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException(String.format("There is no student with id = %s", id)));
+                .orElseThrow(() -> new StudentNotFoundException(
+                        String.format("There is no student with id = %s", id)));
     }
 
-    public void deleteStudentBy(Long id) throws StudentNotFoundException {
+    public void deleteStudentBy(final Long id) throws StudentNotFoundException {
         Optional<Student> student = studentRepository.findById(id);
         if (student.isEmpty()) {
             throw new StudentNotFoundException(String.format("There is no student with id = %s", id));

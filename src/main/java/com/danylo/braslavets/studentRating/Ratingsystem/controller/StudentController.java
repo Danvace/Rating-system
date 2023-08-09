@@ -16,7 +16,7 @@ public class StudentController {
     private final StudentService studentService;
 
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(final StudentService studentService) {
         this.studentService = studentService;
     }
 
@@ -26,27 +26,27 @@ public class StudentController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id) throws StudentNotFoundException {
+    public ResponseEntity<Student> getStudentById(@PathVariable final Long id) throws StudentNotFoundException {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
     @GetMapping(path = "/group/{groupId}")
-    public ResponseEntity<List<Student>> getStudentsByGroupId(@PathVariable Long groupId) {
+    public ResponseEntity<List<Student>> getStudentsByGroupId(@PathVariable final Long groupId) {
         return ResponseEntity.ok(studentService.getStudentsByGroupId(groupId));
     }
 
     @PostMapping
-    public ResponseEntity<Student> addStudent(@RequestBody @Valid Student student) {
+    public ResponseEntity<Student> addStudent(@RequestBody @Valid final Student student) {
         return ResponseEntity.ok(studentService.addStudent(student));
     }
 
     @PutMapping
-    public ResponseEntity<Student> putStudent(@RequestBody @Valid Student student) {
+    public ResponseEntity<Student> putStudent(@RequestBody @Valid final Student student) {
         return ResponseEntity.ok(studentService.putStudent(student));
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteStudent(@PathVariable Long id) throws StudentNotFoundException {
+    public void deleteStudent(@PathVariable final Long id) throws StudentNotFoundException {
         studentService.deleteStudentBy(id);
     }
 
