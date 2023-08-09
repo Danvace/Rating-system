@@ -1,7 +1,9 @@
 package com.danylo.braslavets.studentRating.Ratingsystem.controller;
 
+import com.danylo.braslavets.studentRating.Ratingsystem.exception.StudentNotFoundException;
 import com.danylo.braslavets.studentRating.Ratingsystem.model.Student;
 import com.danylo.braslavets.studentRating.Ratingsystem.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +26,7 @@ public class StudentController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id) throws StudentNotFoundException {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
@@ -34,17 +36,17 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> addStudent(@RequestBody @Valid Student student) {
         return ResponseEntity.ok(studentService.addStudent(student));
     }
 
     @PutMapping
-    public ResponseEntity<Student> putStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> putStudent(@RequestBody @Valid Student student) {
         return ResponseEntity.ok(studentService.putStudent(student));
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteStudent(@PathVariable Long id) {
+    public void deleteStudent(@PathVariable Long id) throws StudentNotFoundException {
         studentService.deleteStudentBy(id);
     }
 

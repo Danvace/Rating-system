@@ -33,12 +33,12 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Student getStudentById(Long id) {
+    public Student getStudentById(Long id) throws StudentNotFoundException {
         return studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(String.format("There is no student with id = %s", id)));
     }
 
-    public void deleteStudentBy(Long id) {
+    public void deleteStudentBy(Long id) throws StudentNotFoundException {
         Optional<Student> student = studentRepository.findById(id);
         if (student.isEmpty()) {
             throw new StudentNotFoundException(String.format("There is no student with id = %s", id));
