@@ -4,6 +4,7 @@ import com.danylo.braslavets.studentRating.Ratingsystem.exception.StudentNotFoun
 import com.danylo.braslavets.studentRating.Ratingsystem.model.Student;
 import com.danylo.braslavets.studentRating.Ratingsystem.service.StudentService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "student")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class StudentController {
-    private final StudentService studentService;
 
-    @Autowired
-    public StudentController(final StudentService studentService) {
-        this.studentService = studentService;
-    }
+    private final StudentService studentService;
 
     @GetMapping
     public ResponseEntity<List<Student>> getStudents() {

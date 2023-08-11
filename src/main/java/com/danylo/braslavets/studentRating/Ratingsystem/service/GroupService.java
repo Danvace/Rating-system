@@ -6,6 +6,7 @@ import com.danylo.braslavets.studentRating.Ratingsystem.model.Group;
 import com.danylo.braslavets.studentRating.Ratingsystem.model.Student;
 import com.danylo.braslavets.studentRating.Ratingsystem.repository.GroupRepository;
 import com.danylo.braslavets.studentRating.Ratingsystem.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,16 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class GroupService {
 
     private final GroupRepository groupRepository;
     private final StudentRepository studentRepository;
-
-    @Autowired
-    public GroupService(final GroupRepository groupRepository, final StudentRepository studentRepository) {
-        this.groupRepository = groupRepository;
-        this.studentRepository = studentRepository;
-    }
 
     public List<Group> getAllGroups() {
         return groupRepository.findAll();
@@ -49,8 +45,6 @@ public class GroupService {
             student.setGroup(null);
             studentRepository.save(student);
         }
-
-        students.clear();
 
         groupRepository.deleteById(id);
     }

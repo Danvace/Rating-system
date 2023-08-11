@@ -3,6 +3,7 @@ package com.danylo.braslavets.studentRating.Ratingsystem.service;
 import com.danylo.braslavets.studentRating.Ratingsystem.exception.StudentNotFoundException;
 import com.danylo.braslavets.studentRating.Ratingsystem.model.Student;
 import com.danylo.braslavets.studentRating.Ratingsystem.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class StudentService {
     private final StudentRepository studentRepository;
-
-    @Autowired
-    public StudentService(final StudentRepository studentDAO) {
-        this.studentRepository = studentDAO;
-    }
 
     public List<Student> getStudents() {
         List<Student> allStudents = studentRepository.findAll();

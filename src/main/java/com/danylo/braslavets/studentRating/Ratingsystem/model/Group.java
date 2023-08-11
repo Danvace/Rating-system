@@ -27,7 +27,7 @@ public class Group {
     private Student groupLeader;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Student> students;
 

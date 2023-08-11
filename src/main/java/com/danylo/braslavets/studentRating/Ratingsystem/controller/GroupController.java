@@ -6,6 +6,7 @@ import com.danylo.braslavets.studentRating.Ratingsystem.model.Group;
 import com.danylo.braslavets.studentRating.Ratingsystem.model.Student;
 import com.danylo.braslavets.studentRating.Ratingsystem.service.GroupService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/groups")
+@RequestMapping("/group")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class GroupController {
 
     private final GroupService groupService;
-
-    @Autowired
-    public GroupController(final GroupService groupService) {
-        this.groupService = groupService;
-    }
 
     @GetMapping
     public ResponseEntity<List<Group>> getAllGroups() {
@@ -47,7 +44,7 @@ public class GroupController {
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
-    @PostMapping("/{groupId}/students/{studentId}")
+    @PostMapping("/{groupId}/student/{studentId}")
     public void addStudentToGroup(@PathVariable final Long groupId, @PathVariable final Long studentId)
             throws StudentNotFoundException, GroupNotFoundException {
         groupService.addStudentToGroup(groupId, studentId);
@@ -69,7 +66,7 @@ public class GroupController {
         return groupService.updateGroup(id, group);
     }
 
-    @DeleteMapping("/{groupId}/students/{studentId}")
+    @DeleteMapping("/{groupId}/student/{studentId}")
     public void removeStudentFromGroup(@PathVariable final Long groupId, @PathVariable final Long studentId)
             throws StudentNotFoundException, GroupNotFoundException {
         groupService.removeStudentFromGroup(groupId, studentId);
