@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class GroupNotFoundException extends NotFoundException {
-    public GroupNotFoundException(String message) {
+    public GroupNotFoundException(final String message) {
         super(message);
     }
 }

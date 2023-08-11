@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class StudentNotFoundException extends NotFoundException {
-    public StudentNotFoundException(String message) {
+    public StudentNotFoundException(final String message) {
         super(message);
     }
 
